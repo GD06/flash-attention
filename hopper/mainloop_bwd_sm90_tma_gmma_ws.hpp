@@ -609,7 +609,7 @@ struct CollectiveMainloopBwdSm90 {
             seqlen_info, n_block, bidb, params.window_size_left,
             params.window_size_right, 0 /*sink_token_length*/);
         // It's possible to have m_block_max <= m_block_min. Exit early
-        if constexpr (Is_causal || Is_local || Varlen) {
+        if constexpr ((Is_causal || Is_local || Varlen) && !Deterministic) {
             if (m_block_max <= m_block_min) { return; }
         }
 
